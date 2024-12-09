@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Colors.pink.shade50,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -98,9 +98,9 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Enter your email',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pinkAccent),
+                    borderSide: const BorderSide(color: Colors.pink),
                   ),
-                  prefixIcon: const Icon(Icons.email, color: Colors.pinkAccent),
+                  prefixIcon: const Icon(Icons.email, color: Colors.pink),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -114,9 +114,9 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'Enter your password',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pinkAccent),
+                    borderSide: const BorderSide(color: Colors.pink),
                   ),
-                  prefixIcon: const Icon(Icons.lock, color: Colors.pinkAccent),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.pink),
                 ),
                 obscureText: true,
               ),
@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pinkAccent,
+                  backgroundColor: Colors.pink.shade50,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: const Text(
                   'Don\'t have an account? Sign Up',
-                  style: TextStyle(color: Colors.pinkAccent),
+                  style: TextStyle(color: Colors.pink),
                 ),
               ),
             ],

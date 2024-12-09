@@ -90,7 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign Up'), backgroundColor: Colors.pinkAccent),
+      appBar: AppBar(title: const Text('Sign Up'), backgroundColor: Colors.pink.shade50),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -106,9 +106,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   hintText: 'Enter your full name',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pinkAccent),
+                    borderSide: const BorderSide(color: Colors.pink),
                   ),
-                  prefixIcon: const Icon(Icons.person, color: Colors.pinkAccent),
+                  prefixIcon: const Icon(Icons.person, color: Colors.pink),
                 ),
               ),
               const SizedBox(height: 16),
@@ -119,9 +119,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   hintText: 'Enter your email',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pinkAccent),
+                    borderSide: const BorderSide(color: Colors.pink),
                   ),
-                  prefixIcon: const Icon(Icons.email, color: Colors.pinkAccent),
+                  prefixIcon: const Icon(Icons.email, color: Colors.pink),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -133,9 +133,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   hintText: 'Enter your password',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pinkAccent),
+                    borderSide: const BorderSide(color: Colors.pink),
                   ),
-                  prefixIcon: const Icon(Icons.lock, color: Colors.pinkAccent),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.pink),
                 ),
                 obscureText: true,
               ),
@@ -151,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ElevatedButton(
                 onPressed: _signUp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pinkAccent,
+                  backgroundColor: Colors.pink.shade50,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),

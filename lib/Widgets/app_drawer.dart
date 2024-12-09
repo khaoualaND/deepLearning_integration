@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/voice_recognition_page.dart';
+
 class AppDrawer extends StatelessWidget {
   final String name;
   final String email;
@@ -25,7 +27,7 @@ class AppDrawer extends StatelessWidget {
               child: Icon(Icons.person, size: 50, color: Colors.white),
             ),
             decoration: const BoxDecoration(
-              color: Colors.pinkAccent,
+              color: Colors.pink,
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(40),
               ),
@@ -61,12 +63,14 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.mic, color: Colors.purple),
-            title: const Text("Vocal Assistant (LLM)"),
+            leading: Icon(Icons.mic, color: Colors.purple),
+            title: Text("Voice Recognition"),
             onTap: () {
               Navigator.of(context).pop();
-              // TODO: Navigate to Vocal Assistant screen
-            },
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => VoiceRecognitionPage(),
+                 ));
+              },
           ),
           ListTile(
             leading: const Icon(Icons.lightbulb, color: Colors.orange),
