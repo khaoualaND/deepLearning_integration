@@ -41,7 +41,7 @@ class AnnPageState extends State<AnnPage> {
         'image',
         _imageBytes!,
         filename: 'image.jpg',
-        contentType: MediaType('image', 'jpeg'), // Specify content type here
+        contentType: MediaType('image', 'jpeg'),
       ));
 
       final response = await request.send();
@@ -52,7 +52,7 @@ class AnnPageState extends State<AnnPage> {
 
         setState(() {
           if (result.containsKey('label')) {
-            _classificationResult = 'Classification: ${result['label']}';
+            _classificationResult = 'Classification with ANN: ${result['label']}';
           } else {
             _classificationResult = 'Error: ${result['error']}';
           }
@@ -73,8 +73,9 @@ class AnnPageState extends State<AnnPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image Classification'),
-        backgroundColor: Colors.pink,
+        title: const Text('ANN Image Classification'),
+        backgroundColor: Colors.deepPurple.shade300, // Consistent color palette
+        elevation: 5,
       ),
       body: Center(
         child: Padding(
@@ -82,34 +83,62 @@ class AnnPageState extends State<AnnPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Display selected image
               _imageBytes != null
-                  ? Image.memory(_imageBytes!, width: 200, height: 200)
+                  ? ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.memory(
+                  _imageBytes!,
+                  width: 250,
+                  height: 250,
+                  fit: BoxFit.cover,
+                ),
+              )
                   : const Icon(Icons.image, size: 200, color: Colors.grey),
 
               const SizedBox(height: 20),
 
-              // Classification result text
-              Text(
-                _classificationResult,
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // Creative Classification result in circular container
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple.shade50,
+                  shape: BoxShape.circle,
+                  boxShadow: [BoxShadow(blurRadius: 6, color: Colors.black26)],
+                ),
+                child: Text(
+                  _classificationResult,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.deepPurple,
+                  ),
+                ),
               ),
 
               const SizedBox(height: 20),
 
-              // Buttons for image selection and classification
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
                     onPressed: _pickImage,
-                    child: const Text('Pick Image'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink.shade100,
+                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('Pick Image', style: TextStyle(fontSize: 16)),
                   ),
                   const SizedBox(width: 20),
                   ElevatedButton(
                     onPressed: _uploadAndClassify,
-                    child: const Text('Classify Image'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple.shade200,
+                      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 30),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    child: const Text('Classify Image', style: TextStyle(fontSize: 16)),
                   ),
                 ],
               ),

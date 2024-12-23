@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../pages/stock.dart';  // Ensure this is correctly imported
 import '../pages/voice_recognition_page.dart';
-import '../pages/cnn_page.dart'; // Import CNN page
+import '../pages/cnn_page.dart';
 import '../pages/ann_page.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -14,33 +15,41 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
+          // Header with User Info
           UserAccountsDrawerHeader(
             accountName: Text(
               name.isNotEmpty ? name : 'Guest User',
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             accountEmail: Text(
               email.isNotEmpty ? email : 'guest@example.com',
               style: const TextStyle(fontSize: 16),
             ),
             currentAccountPicture: const CircleAvatar(
-              backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.deepPurple,
               child: Icon(Icons.person, size: 50, color: Colors.white),
             ),
-            decoration: const BoxDecoration(
-              color: Colors.pink,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.purple.shade300, Colors.pink.shade100],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(40),
+                bottomLeft: Radius.circular(40),
               ),
             ),
           ),
+
+          // Navigation Section: Image Classification
           ExpansionTile(
-            leading: const Icon(Icons.image, color: Colors.blueAccent),
+            leading: const Icon(Icons.image, color: Colors.deepPurple),
             title: const Text("Image Classification"),
-            subtitle: const Text("Fashion Mnist"),
+            subtitle: const Text("Fashion MNIST", style: TextStyle(fontSize: 14)),
             children: [
               ListTile(
-                title: const Text("ANN"),
+                title: const Text("ANN", style: TextStyle(fontSize: 16)),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
@@ -49,7 +58,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                title: const Text("CNN"),
+                title: const Text("CNN", style: TextStyle(fontSize: 16)),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
@@ -59,17 +68,23 @@ class AppDrawer extends StatelessWidget {
               ),
             ],
           ),
+
+          // Stock Price Prediction
           ListTile(
             leading: const Icon(Icons.trending_up, color: Colors.green),
-            title: const Text("Stock Price Prediction"),
+            title: const Text("Stock Price Prediction", style: TextStyle(fontSize: 16)),
             onTap: () {
               Navigator.of(context).pop();
-              // TODO: Navigate to Stock Price Prediction screen
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => StockPredictionPage()), // Corrected navigation
+              );
             },
           ),
+
+          // Voice Recognition
           ListTile(
-            leading: Icon(Icons.mic, color: Colors.purple),
-            title: Text("Voice Recognition"),
+            leading: const Icon(Icons.mic, color: Colors.purple),
+            title: const Text("Voice Recognition", style: TextStyle(fontSize: 16)),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).push(
@@ -77,9 +92,11 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
+
+          // Rag Section
           ListTile(
             leading: const Icon(Icons.lightbulb, color: Colors.orange),
-            title: const Text("Rag"),
+            title: const Text("Rag", style: TextStyle(fontSize: 16)),
             onTap: () {
               Navigator.of(context).pop();
               // TODO: Navigate to Rag screen

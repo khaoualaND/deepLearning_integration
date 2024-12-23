@@ -39,21 +39,16 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     try {
-      // Create user with email and password
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
       User? user = userCredential.user;
 
       if (user != null) {
-        // Update the user's display name
         await user.updateDisplayName(name);
-
-        // Reload the user to ensure the display name is updated
         await user.reload();
         user = FirebaseAuth.instance.currentUser;
 
-        // Navigate to HomePage
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -65,7 +60,6 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       }
     } on FirebaseAuthException catch (e) {
-      // Handle Firebase-specific errors
       if (e.code == 'email-already-in-use') {
         setState(() {
           errorMessage = 'This email is already in use.';
@@ -80,7 +74,6 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }
     } catch (e) {
-      // Handle generic errors
       setState(() {
         errorMessage = 'An unexpected error occurred. Please try again.';
       });
@@ -90,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sign Up'), backgroundColor: Colors.pink.shade50),
+      appBar: AppBar(title: const Text('Sign Up'), backgroundColor: Colors.deepPurple.shade100),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
@@ -105,41 +98,44 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Full Name',
                   hintText: 'Enter your full name',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.deepPurple),
                   ),
-                  prefixIcon: const Icon(Icons.person, color: Colors.pink),
+                  prefixIcon: const Icon(Icons.person, color: Colors.deepPurple),
                 ),
               ),
               const SizedBox(height: 16),
+              // Email Field
               TextField(
                 controller: _email,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.deepPurple),
                   ),
-                  prefixIcon: const Icon(Icons.email, color: Colors.pink),
+                  prefixIcon: const Icon(Icons.email, color: Colors.deepPurple),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16),
+              // Password Field
               TextField(
                 controller: _password,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.deepPurple),
                   ),
-                  prefixIcon: const Icon(Icons.lock, color: Colors.pink),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.deepPurple),
                 ),
                 obscureText: true,
               ),
               const SizedBox(height: 16),
+              // Error Message
               if (errorMessage.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
@@ -148,17 +144,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: const TextStyle(color: Colors.red, fontSize: 14),
                   ),
                 ),
+              // Sign Up Button
               ElevatedButton(
                 onPressed: _signUp,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink.shade50,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Colors.deepPurple.shade400, // Set background color
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 30),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text('Sign Up', style: TextStyle(fontSize: 18)),
-              ),
+                child: const Text('Sign Up'),
+              )
             ],
           ),
         ),

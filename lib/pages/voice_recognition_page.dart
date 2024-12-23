@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class VoiceRecognitionPage extends StatefulWidget {
   @override
@@ -13,16 +14,28 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
   String _transcribedText = 'Tap the button and start speaking';
   String _responseText = '';
   late GenerativeModel _model;
-  final String _apiKey = 'AIzaSyAgzvusIUMcY98ba-Jbo8CGHeOJgZ9TiOY';
+  late String _apiKey;
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
-    _model = GenerativeModel(
-      model: 'gemini-1.5-flash',
-      apiKey: _apiKey,
-    );
+    _loadApiKey();
+  }
+
+  void _loadApiKey() async {
+    await dotenv.load();
+    setState(() {
+      _apiKey = dotenv.env['API_KEY'] ?? '';
+      if (_apiKey.isEmpty) {
+        _responseText = 'API key not found. Please check your .env file.';
+      } else {
+        _model = GenerativeModel(
+          model: 'gemini-1.5-flash',
+          apiKey: _apiKey,
+        );
+      }
+    });
   }
 
   Future<void> _listen() async {
@@ -50,11 +63,11 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
     try {
       final response = await _model.generateContent([Content.text(prompt)]);
       setState(() {
-        _responseText = response.text!;
+        _responseText = response.text ?? 'No response from Gemini';
       });
     } catch (e) {
       setState(() {
-        _responseText = 'Failed to generate response: $e';
+        _responseText = 'Failed to generate response: ${e.toString()}';
       });
     }
   }
@@ -63,9 +76,8 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Voice Recognition'),
-        backgroundColor: Colors.pink.shade50
-,
+        title: const Text('Voice Recognition'),
+        backgroundColor: Colors.deepPurple.shade100,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -73,23 +85,24 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 40,
-              backgroundColor: Colors.blue,
+              radius: 50,
+              backgroundColor: Colors.pink.shade100,
               child: Icon(
-                Icons.person,
-                size: 50,
-                color: Colors.white,
+                Icons.mic,
+                size: 60,
+                color: _isListening ? Colors.green : Colors.white,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 20),
             Text(
-              'Tap to talk',
+              'Tap to start speaking',
               style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.deepPurple.shade700,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 20),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16.0),
@@ -99,14 +112,14 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
               ),
               child: Text(
                 _transcribedText,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black54,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 20),
             Container(
               width: double.infinity,
               height: 150,
@@ -118,7 +131,7 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
               child: SingleChildScrollView(
                 child: Text(
                   _responseText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black54,
                   ),
@@ -126,12 +139,14 @@ class _VoiceRecognitionPageState extends State<VoiceRecognitionPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 30),
             FloatingActionButton(
               onPressed: _listen,
-              backgroundColor: Colors.pink.shade50
-,
-              child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+              backgroundColor: _isListening ? Colors.green.shade400 : Colors.pink.shade100,
+              child: Icon(
+                _isListening ? Icons.stop : Icons.mic,
+                size: 30,
+              ),
             ),
           ],
         ),

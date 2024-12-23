@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../auth_service.dart'; // Import the AuthService
-import 'home_page.dart'; // Import the HomePage
-import 'sign_up_page.dart'; // Import the SignUpPage
+import '../auth_service.dart';
+import 'home_page.dart';
+import 'sign_up_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -36,26 +36,23 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     try {
-      // Sign in user
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
       User? user = userCredential.user;
 
       if (user != null) {
-        // Pass user info to HomePage
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (_) => HomePage(
-              name: user.displayName ?? "User Name", // Default to "User Name" if null
+              name: user.displayName ?? "User Name",
               email: user.email ?? "user@example.com",
             ),
           ),
         );
       }
     } on FirebaseAuthException catch (e) {
-      // Handle specific login errors
       if (e.code == 'user-not-found') {
         setState(() {
           errorMessage = 'No user found with this email.';
@@ -81,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
-        backgroundColor: Colors.pink.shade50,
+        backgroundColor: Colors.deepPurple.shade100, // Soft purple instead of pink
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -97,10 +94,10 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.deepPurple),
                   ),
-                  prefixIcon: const Icon(Icons.email, color: Colors.pink),
+                  prefixIcon: const Icon(Icons.email, color: Colors.deepPurple),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -113,10 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    borderSide: const BorderSide(color: Colors.pink),
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.deepPurple),
                   ),
-                  prefixIcon: const Icon(Icons.lock, color: Colors.pink),
+                  prefixIcon: const Icon(Icons.lock, color: Colors.deepPurple),
                 ),
                 obscureText: true,
               ),
@@ -136,10 +133,10 @@ class _LoginPageState extends State<LoginPage> {
               ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.pink.shade50,
+                  backgroundColor: Colors.deepPurple.shade100, // Soft purple
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 child: const Text('Login', style: TextStyle(fontSize: 18)),
@@ -153,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: const Text(
                   'Don\'t have an account? Sign Up',
-                  style: TextStyle(color: Colors.pink),
+                  style: TextStyle(color: Colors.deepPurple),
                 ),
               ),
             ],

@@ -13,7 +13,7 @@ ann_interpreter = tf.lite.Interpreter(model_path=r"C:\Users\HP\Documents\DeepLea
 ann_interpreter.allocate_tensors()
 
 # Load the CNN TFLite model
-cnn_interpreter = tf.lite.Interpreter(model_path=r"C:\Users\HP\Documents\DeepLearning\flutter\flutter_project\assets\models\cnn_model.tflite")
+cnn_interpreter = tf.lite.Interpreter(model_path=r"C:\Users\HP\Documents\DeepLearning\flutter\flutter_project\assets\models\stock_prediction_model.tflite")
 cnn_interpreter.allocate_tensors()
 
 # Define the input and output details for both models
