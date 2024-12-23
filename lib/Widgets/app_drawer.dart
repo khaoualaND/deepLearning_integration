@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../pages/voice_recognition_page.dart';
+import '../pages/cnn_page.dart'; // Import CNN page
+import '../pages/ann_page.dart';
 
 class AppDrawer extends StatelessWidget {
   final String name;
@@ -42,14 +43,18 @@ class AppDrawer extends StatelessWidget {
                 title: const Text("ANN"),
                 onTap: () {
                   Navigator.of(context).pop();
-                  // TODO: Navigate to ANN screen
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => AnnPage()),
+                  );
                 },
               ),
               ListTile(
                 title: const Text("CNN"),
                 onTap: () {
                   Navigator.of(context).pop();
-                  // TODO: Navigate to CNN screen
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => CnnPage()),
+                  );
                 },
               ),
             ],
@@ -67,10 +72,10 @@ class AppDrawer extends StatelessWidget {
             title: Text("Voice Recognition"),
             onTap: () {
               Navigator.of(context).pop();
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => VoiceRecognitionPage(),
-                 ));
-              },
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => VoiceRecognitionPage()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.lightbulb, color: Colors.orange),
