@@ -33,8 +33,7 @@ class CnnPageState extends State<CnnPage> {
       return;
     }
 
-    final Uri uri = Uri.parse('http://192.168.1.215:5000/classify_cnn'); // Flask server URL
-
+    final Uri uri = Uri.parse('http://172.20.30.38:5000/classify_cnn');
     try {
       final request = http.MultipartRequest('POST', uri);
       request.files.add(http.MultipartFile.fromBytes(

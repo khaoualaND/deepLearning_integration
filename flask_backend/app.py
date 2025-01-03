@@ -25,8 +25,11 @@ cnn_output_details = cnn_interpreter.get_output_details()
 
 # Define labels (this should match the order of the training classes)
 labels = [
-    "Apple", "Banana", "Avocado", "Cherry", "Kiwi", "Mango", 
-    "Orange", "Pineapple", "Strawberry", "Watermelon"
+    'apple', 'banana', 'beetroot', 'bell pepper', 'cabbage', 'capsicum', 'carrot', 'cauliflower',
+    'chilli pepper', 'corn', 'cucumber', 'eggplant', 'garlic', 'ginger', 'grapes', 'jalepeno', 
+    'kiwi', 'lemon', 'lettuce', 'mango', 'onion', 'orange', 'paprika', 'pear', 'peas', 
+    'pineapple', 'pomegranate', 'potato', 'raddish', 'soy beans', 'spinach', 'sweetcorn', 
+    'sweetpotato', 'tomato', 'turnip', 'watermelon'
 ]
 
 # ANN Classification Route

@@ -1,10 +1,7 @@
-Apple: 0
-Banana: 1
-avocado: 2
-cherry: 3
-kiwi: 4
-mango: 5
-orange: 6
-pinenapple: 7
-strawberries: 8
-watermelon: 9
+labels = [
+    'apple', 'banana', 'beetroot', 'bell pepper', 'cabbage', 'capsicum', 'carrot', 'cauliflower',
+    'chilli pepper', 'corn', 'cucumber', 'eggplant', 'garlic', 'ginger', 'grapes', 'jalepeno', 
+    'kiwi', 'lemon', 'lettuce', 'mango', 'onion', 'orange', 'paprika', 'pear', 'peas', 
+    'pineapple', 'pomegranate', 'potato', 'raddish', 'soy beans', 'spinach', 'sweetcorn', 
+    'sweetpotato', 'tomato', 'turnip', 'watermelon'
+]
